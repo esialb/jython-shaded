@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.scijava</groupId>
 		<artifactId>pom-jython-shaded</artifactId>
-		<version>2.5.4-SNAPSHOT</version>
+		<version>2.7.0-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>jython-deps</artifactId>
@@ -43,7 +43,9 @@
 			     build (org.scijava:jython-shaded) which will readd the <foo>.py
 			     classes unaltered. -->
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-shade-plugin</artifactId>
+				<version>2.3</version>
 				<configuration>
 					<filters>
 						<filter>
@@ -55,40 +57,14 @@
 					</filters>
 					<relocations>
 						<relocation>
-							<pattern>com.google</pattern>
-							<shadedPattern>org.scijava.jython.shaded.com.google</shadedPattern>
-						</relocation>
-						<relocation>
-							<pattern>com.kenai</pattern>
-							<shadedPattern>org.scijava.jython.shaded.com.kenai</shadedPattern>
-						</relocation>
-						<relocation>
-							<pattern>com.xhaus</pattern>
-							<shadedPattern>org.scijava.jython.shaded.com.xhaus</shadedPattern>
-						</relocation>
-						<relocation>
-							<pattern>com.ziclix</pattern>
-							<shadedPattern>org.scijava.jython.shaded.com.ziclix</shadedPattern>
-						</relocation>
-						<relocation>
-							<pattern>javatests</pattern>
-							<shadedPattern>org.scijava.jython.shaded.javatests</shadedPattern>
-						</relocation>
-						<relocation>
-							<pattern>jline</pattern>
-							<shadedPattern>org.scijava.jython.shaded.jline</shadedPattern>
-						</relocation>
-						<relocation>
-							<pattern>jni</pattern>
-							<shadedPattern>org.scijava.jython.shaded.jni</shadedPattern>
-						</relocation>
-						<relocation>
-							<pattern>jnr</pattern>
-							<shadedPattern>org.scijava.jython.shaded.jnr</shadedPattern>
-						</relocation>
-						<relocation>
-							<pattern>org.w3c</pattern>
-							<shadedPattern>org.scijava.jython.shaded.org.w3c</shadedPattern>
+							<pattern></pattern>
+							<shadedPattern>org.scijava.jython.shaded.</shadedPattern>
+							<excludes>
+								<exclude>org/python/**</exclude>
+								<exclude>Lib/**</exclude>
+								<exclude>license/**</exclude>
+								<exclude>META-INF/**</exclude>
+							</excludes>
 						</relocation>
 					</relocations>
 				</configuration>
