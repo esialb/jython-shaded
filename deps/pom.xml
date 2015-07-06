@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
@@ -35,13 +36,12 @@
 				</configuration>
 			</plugin>
 
-			<!-- NB: Shade all of Jython's dependencies, excluding Jython's <foo>.py
-			     classes, because they cause problems with ASM processing. This is
-			     OK, because they are wrappers which do not directly reference the
-			     dependencies, and hence do not require bytecode modification. The
-			     resultant artifact will then be consumed by the next module in the
-			     build (org.scijava:jython-shaded) which will readd the <foo>.py
-			     classes unaltered. -->
+			<!-- NB: Shade all of Jython's dependencies, excluding Jython's <foo>.py 
+				classes, because they cause problems with ASM processing. This is OK, because 
+				they are wrappers which do not directly reference the dependencies, and hence 
+				do not require bytecode modification. The resultant artifact will then be 
+				consumed by the next module in the build (org.scijava:jython-shaded) which 
+				will readd the <foo>.py classes unaltered. -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-shade-plugin</artifactId>
@@ -52,6 +52,8 @@
 							<artifact>org.python:jython-standalone</artifact>
 							<excludes>
 								<exclude>**/*$py.class</exclude>
+								<exclude>org/w3c/dom/**</exclude>
+								<exclude>org/xml/sax/**</exclude>
 							</excludes>
 						</filter>
 					</filters>
@@ -59,12 +61,41 @@
 						<relocation>
 							<pattern></pattern>
 							<shadedPattern>org.scijava.jython.shaded.</shadedPattern>
-							<excludes>
-								<exclude>org/python/**</exclude>
-								<exclude>Lib/**</exclude>
-								<exclude>license/**</exclude>
-								<exclude>META-INF/**</exclude>
-							</excludes>
+							<includes>
+								<include>ProxyDeserialization</include>
+							</includes>
+						</relocation>
+						<relocation>
+							<pattern>com.kenai</pattern>
+							<shadedPattern>org.scijava.jython.shaded.com.kenai</shadedPattern>
+						</relocation>
+						<relocation>
+							<pattern>com.xhaus</pattern>
+							<shadedPattern>org.scijava.jython.shaded.com.xhaus</shadedPattern>
+						</relocation>
+						<relocation>
+							<pattern>com.ziclix</pattern>
+							<shadedPattern>org.scijava.jython.shaded.com.ziclix</shadedPattern>
+						</relocation>
+						<relocation>
+							<pattern>javatests</pattern>
+							<shadedPattern>org.scijava.jython.shaded.javatests</shadedPattern>
+						</relocation>
+						<relocation>
+							<pattern>javax.xml</pattern>
+							<shadedPattern>org.scijava.jython.shaded.javax.xml</shadedPattern>
+						</relocation>
+						<relocation>
+							<pattern>jline</pattern>
+							<shadedPattern>org.scijava.jython.shaded.jline</shadedPattern>
+						</relocation>
+						<relocation>
+							<pattern>jnr</pattern>
+							<shadedPattern>org.scijava.jython.shaded.jnr</shadedPattern>
+						</relocation>
+						<relocation>
+							<pattern>org.fusesource</pattern>
+							<shadedPattern>org.scijava.jython.shaded.org.fusesource</shadedPattern>
 						</relocation>
 					</relocations>
 				</configuration>
