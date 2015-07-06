@@ -4,7 +4,7 @@ This project provides a rebundled version of the Jython library with shaded
 <dependency>
 	<groupId>org.scijava</groupId>
 	<artifactId>jython-shaded</artifactId>
-	<version>2.5.3</version>
+	<version>2.7.0-SNAPSHOT</version>
 </dependency>
 ```
 
@@ -30,7 +30,7 @@ The naive way to add a Jython dependency is:
 <dependency>
 	<groupId>org.python</groupId>
 	<artifactId>jython</artifactId>
-	<version>2.5.3</version>
+	<version>2.7.0</version>
 </dependency>
 ```
 
@@ -43,7 +43,7 @@ So another artifact is available which includes those libraries:
 <dependency>
 	<groupId>org.python</groupId>
 	<artifactId>jython-standalone</artifactId>
-	<version>2.5.3</version>
+	<version>2.7.0</version>
 </dependency>
 ```
 
@@ -56,8 +56,10 @@ luck.
 
 ### Example
 
+**!!! This example needs to be updated for jython 2.7.0 !!!**
+
 Here is an example Jython script that produces an exception when attempting to
-run it using Jython 2.5.3 when JRuby 1.7.12 and dependencies (including JFFI
+run it using Jython 2.7.0 when JRuby 1.7.12 and dependencies (including JFFI
 1.2.7) are also on the classpath:
 
 ```
@@ -69,8 +71,8 @@ The exception which occurs is:
 ```
 Traceback (most recent call last):
 	File "test.py", line 2, in <module>
-	File ".../jython-standalone-2.5.3.jar/Lib/posixpath.py", line 195, in isdir
-	File ".../jython-standalone-2.5.3.jar/Lib/posixpath.py", line 195, in isdir
+	File ".../jython-standalone-2.7.0.jar/Lib/posixpath.py", line 195, in isdir
+	File ".../jython-standalone-2.7.0.jar/Lib/posixpath.py", line 195, in isdir
 java.lang.IncompatibleClassChangeError: Found class com.kenai.jffi.InvocationBuffer, but interface was expected
 	at com.kenai.jaffl.provider.jffi.AsmRuntime.marshal(AsmRuntime.java:167)
 	at org.python.posix.LibC$jaffl$0.stat$raw(Unknown Source)
@@ -79,8 +81,8 @@ java.lang.IncompatibleClassChangeError: Found class com.kenai.jffi.InvocationBuf
 	at org.python.posix.LazyPOSIX.stat(LazyPOSIX.java:207)
 	at org.python.modules.posix.PosixModule$StatFunction.__call__(PosixModule.java:954)
 	at org.python.core.PyObject.__call__(PyObject.java:391)
-	at posixpath$py.isdir$17(/Applications/Science/Fiji.app/jars/jython-standalone-2.5.3.jar/Lib/posixpath.py:198)
-	at posixpath$py.call_function(/Applications/Science/Fiji.app/jars/jython-standalone-2.5.3.jar/Lib/posixpath.py)
+	at posixpath$py.isdir$17(/Applications/Science/Fiji.app/jars/jython-standalone-2.7.0.jar/Lib/posixpath.py:198)
+	at posixpath$py.call_function(/Applications/Science/Fiji.app/jars/jython-standalone-2.7.0.jar/Lib/posixpath.py)
 	at org.python.core.PyTableCode.call(PyTableCode.java:165)
 	at org.python.core.PyBaseCode.call(PyBaseCode.java:134)
 	at org.python.core.PyFunction.__call__(PyFunction.java:317)
